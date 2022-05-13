@@ -4,10 +4,6 @@ input, button {
     background: transparent;
 }
 
-button:hover {
+aside {
+    height: 100vh;
 }
-
-.white {
-    color: white;
-}
-
