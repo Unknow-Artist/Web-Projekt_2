@@ -1,0 +1,13 @@
+input, button {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+button:hover {
+}
+
+.white {
+    color: white;
+}
+
