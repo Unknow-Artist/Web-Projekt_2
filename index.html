@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="icons/chat-fill-light.svg">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="updog.css">
 </head>
 <body class="overflow-hidden">
     <header class="navbar navbar-dark bg-dark bd-navbar border-bottom">
@@ -16,10 +17,8 @@
                 UPDOG
             </a>
             <div class="input-group w-50 text-white">
-                <input type="search" class="form-control" placeholder="search" aria-label="Search" aria-describedby="button-search">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search text-white"></i></button>
-                </div>
+                <input type="search" class="form-control" placeholder="search" aria-label="Search" aria-describedby="button-search" style="background: var(--bs-gray-200);">
+                <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search text-white"></i></button>
             </div>
         </nav>
     </header>
@@ -28,68 +27,119 @@
             <div class="bg-dark text-white h2 p-3 m-0">
                 Chat
             </div>
-            <div class="list-group list-group-flush" style="height: calc(100vh - 125px); overflow-y: auto;">
+            <div class="list-group list-group-flush" id="contacts" style="height: calc(100vh - 125px); overflow-y: auto; background: var(--bs-gray-100);">
                 <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
-                </div>
-                <div class="list-group-item list-group-item-action py-3">
-                    <strong>Title</strong>
-                    <p class="m-0">Some Text</p>
+                    <strong>Name</strong>
+                    <p class="m-0">Letzte Nachricht</p>
                 </div>
             </div>
         </aside>
-        <div class="container d-flex flex-column p-3" style="height: calc(100vh - 55px);">
-            <div class="d-flex flex-column" style="height: calc(100% - 38px);">
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+        <div class="container-sm d-flex flex-column p-3" style="height: calc(100vh - 55px);">
+            <div class="d-flex flex-column-reverse mb-3 gap-2 scrollarea" style="height: calc(100% - 38px); overflow-y: auto;">
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2 align-self-end" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>24.5.2022</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
-                <div class="badge rounded-pill text-bg-primary p-3" style="width: fit-content;">
-                    Nachricht
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
+                </div>
+                <div class="badge rounded-pill text-bg-primary text-start p-4 py-2" style="width: 500px; white-space: normal;">
+                    <div class="d-flex flex-row justify-content-between">
+                        <strong>Name</strong>
+                        <span>Datum</span>
+                    </div>
+                    <p class="m-0 mt-1 fw-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste saepe sunt id dolores, nobis quasi quas eos voluptas corporis eveniet.</p>
                 </div>
             </div>
             <div class="input-group">
