@@ -23,12 +23,12 @@
             </div>
         </nav>
     </header>
-    <main class="row">
-        <aside class="col-3">
+    <main class="d-flex flex-row">
+        <aside class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
             <div class="bg-dark text-white h2 p-3 m-0">
                 Chat
             </div>
-            <div class="list-group list-group-flush scrollarea">
+            <div class="list-group list-group-flush" style="height: calc(100vh - 125px); overflow-y: auto;">
                 <div class="list-group-item list-group-item-action py-3">
                     <strong>Title</strong>
                     <p class="m-0">Some Text</p>
@@ -71,6 +71,19 @@
                 </div>
             </div>
         </aside>
+        <div class="container" id="chat-box">
+            <div class="">
+                <div class="row">
+                    <div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Nachricht" aria-label="Nachricht" aria-describedby="button-senden">
+                <button class="btn btn-outline-secondary" type="button" id="button-senden">Senden</button>
+            </div>
+        </div>
     </main>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
