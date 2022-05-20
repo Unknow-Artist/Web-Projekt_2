@@ -1,5 +1,5 @@
 <?php
-    require_once('inc/loginCheck.php');
+    require_once('loginCheck.php');
 
     $meldung = '';
 
@@ -30,9 +30,6 @@
 	<body>
 		<header>
 			<h1>Musikalbenverwaltung</h1>
-			<?php 
-				include('navigation.html');
-			?>
 		</header>
 		<h2>Admin - Login</h2>
 		<div class ="formAreas">

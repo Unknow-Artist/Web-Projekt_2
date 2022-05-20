@@ -10,12 +10,12 @@ function checkLogin($userGroup){
 		}
 		else{
 			session_unset();
-			header('Location: http://localhost/m133/09_news_admin/admin/index.php');
+			header('Location: http://localhost/Web-Projekt_2/php/index.php');
 			exit;
 		}
 	}
 	
-	header('Location: http://localhost/m133/09_news_admin/admin/index.php');
+	header('Location: http://localhost/Web-Projekt_2/php/index.php');
 	exit;
 }
 
@@ -32,14 +32,14 @@ function isUserLogedIn(){
 	return false;
 }
 
-function logInUser($userName, $password){
+function logInUser($username, $password){
 
 	global $db;
-	$query = "SELECT * FROM verfasser  WHERE username = :username AND password = :password LIMIT 1;" ;
+	$query = "SELECT * FROM user  WHERE username = :username AND password = :password LIMIT 1;" ;
 		
 		try{
 			$prepStat = $db -> prepare($query);
-			$prepStat -> bindParam(':username', $userName);
+			$prepStat -> bindParam(':username', $username);
 			$prepStat -> bindParam(':password', $password);
 			$prepStat -> execute();
 		} catch (PDOException $e) {
@@ -49,20 +49,21 @@ function logInUser($userName, $password){
 			}
 			exit;
 		}
-
-	$result = $prepStat -> fetchAll();
-	if($result[0]['username'] == $userName && $result[0]['password'] == $password){
-		$_SESSION['logedIn'] = true;
-		$_SESSION['validTo'] = time() + 60*60*24*7*365;
-		$_SESSION['userGroup'][] = ['autor'];
-		$_SESSION['lang'] = $result[0]['language'];
-		$_SESSION['verfasser-ID'] = $result[0]['id'];
-		$_SESSION['userName'] = $result[0]['name'];
-		return true;
-	}
-	else{
-		return false;
-	}
+/*
+		$result = $prepStat -> fetchAll();
+		if($result[0]['username'] == $username && $result[0]['password'] == $password){
+			$_SESSION['logedIn'] = true;
+			$_SESSION['validTo'] = time() + 60*60*24*7*365;
+			$_SESSION['userGroup'][] = ['autor'];
+			$_SESSION['lang'] = $result[0]['language'];
+			$_SESSION['verfasser-ID'] = $result[0]['id'];
+			$_SESSION['username'] = $result[0]['name'];
+			return true;
+		}
+		else{
+			return false;
+		}
+		*/
 
 }
 
