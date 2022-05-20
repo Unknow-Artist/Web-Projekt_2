@@ -19,7 +19,7 @@
          <div class="h1 align-self-center" style="font-family: Kaushan Script;">
             Anmelden
          </div>
-         <form class="d-flex flex-column gap-3" action="php/login.php" method="post">
+         <form class="d-flex flex-column gap-3" action="logReg-control.php" method="post">
             <div class="form-floating">
                <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="email" placeholder="E-Mail-Adresse">
                <label for="floatingEmail">E-Mail-Adresse</label>
@@ -28,11 +28,10 @@
                <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="password" placeholder="Passwort">
                <label for="floatingPassword">Passwort</label>
             </div>
-            <button type="submit" class="btn btn-outline-primary">Anmelden</button>
+            <button type="submit" name="login" class="btn btn-outline-primary">Anmelden</button>
          </form>
       </div>
 
-      <!-- horizontal dividing line -->
       <div class="d-flex flex-row justify-content-center align-items-center">
          <div class="divider-horizontal"></div>
          <div class="text-center mx-3">oder</div>
