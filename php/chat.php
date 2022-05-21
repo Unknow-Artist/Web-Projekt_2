@@ -1,36 +1,19 @@
 <?php
-$host = 'localhost';
-$database = 'updog';
-$usr = 'root';
-$pass = '';
-$dns = $dns = 'mysql:host=' . $host . ';dbname=' . $database;
-$db = new PDO($dns, $usr, $pass);
+// datenbankverbindung aufbauen und datenbank auswählen
+require_once('php/db_inc.php');
+require_once('php/connect.php');
 
 if (isset($_POST["submit"])) {
-    $message = $_POST["message"];
-    $db -> query("INSERT INTO message (user_id, text) VALUES ('1', '$message')");
-}
+    // message einlesen
+    $message = htmlentities($_POST["message"]);
 
+    // user_id aus session holen
+    $user_id = $_SESSION["user_id"];
+
+    // sql-statement erstellen
+    $statement = $db -> prepare("INSERT INTO chat (user_id, message) VALUES (:user_id, :message)");
+    $statement -> bindParam(':user_id', $user_id);
+    $statement -> bindParam(':message', $message);
+    $statement -> execute();
+}
 ?>
-<!DOCTYPE html>
-<html lang="de-CH">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-</head>
-<body>
-    <form action="chat.php" method="post">
-        <label>
-            Name
-            <input type="text" name="name">
-        </label>
-        <label>
-            Nachricht
-            <input type="text" name="message">
-        </label>
-        <input type="submit" name="submit" value="Senden">
-    </form>
-</body>
-</html>
