@@ -1,8 +1,5 @@
 <?php 
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 
 if(isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email"])) {
     // Datenbank verbinden
@@ -29,14 +26,15 @@ if(isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email"
     }
 }
 
-if(!empty($_POST['register'])) {
-    $username = htmlentities($_POST['username']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $email = htmlentities($_POST['email']);
-
+if(!empty($_POST['register']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['username'])) {
     // Datenbank-Verbindung aufbauen, Datenbank wählen
     require('db_inc.php');
     require('connect.php');
+
+    // Daten aus Formular holen
+    $username = htmlentities($_POST['username']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $email = htmlentities($_POST['email']);
 
     // Datensatz speichern
     $statement = $db -> prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");

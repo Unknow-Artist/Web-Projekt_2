@@ -1,5 +1,4 @@
 <?php
-// datenbankverbindung aufbauen und datenbank auswählen
 require_once('php/db_inc.php');
 require_once('php/connect.php');
 

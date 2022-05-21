@@ -5,24 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UPDOG</title>
     <link rel="icon" type="image/svg+xml" href="chat-fill-light.svg">
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 <body class="overflow-hidden">
-    <header class="navbar navbar-dark bg-dark bd-navbar border-bottom">
+    <header class="navbar navbar-dark bg-dark bd-navbar">
         <nav class="container-xxl bd-gutter" aria-label="Main navigation">
             <a href="index.html" class="navbar-brand h1 mb-0">
                 <i class="bi bi-chat-fill me-1"></i>
                 UPDOG
             </a>
             <div class="input-group w-50 text-white">
-                <input type="search" class="form-control" placeholder="search" aria-label="Search" aria-describedby="button-search" style="background: var(--bs-gray-200);">
+                <input type="search" class="form-control" placeholder="search" aria-label="Search" aria-describedby="button-search">
                 <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search text-white"></i></button>
             </div>
         </nav>
     </header>
     <main class="d-flex flex-row">
-        <aside class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 300px;">
+        <aside class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
             <div class="bg-dark text-white h2 p-3 m-0">
                 Chat
             </div>
@@ -33,8 +37,8 @@
                 </div>
             </div>
         </aside>
-        <div class="container-sm d-flex flex-column p-3 pt-0" style="height: calc(100vh - 55px);">
-            <div class="d-flex flex-column-reverse mb-3 gap-2 scrollarea" style="height: calc(100% - 38px); overflow-y: auto;">
+        <div class="w-100 d-flex flex-column p-3 pt-0" style="height: calc(100vh - 55px);">
+            <div class="d-flex flex-column-reverse mb-3 gap-2 scrollarea">
                 <div class="badge rounded-pill text-bg-primary text-start p-4 py-2 align-self-end" style="width: 500px; white-space: normal;">
                     <div class="d-flex flex-row justify-content-between">
                         <strong>Name</strong>

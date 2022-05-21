@@ -1,0 +1,20 @@
+.h1, .h2 {
+    font-family: 'Kaushan Script', cursive;
+}
+
+aside {
+    width: 300px;
+}
+
+.scrollarea {
+    height: calc(100% - 38px); 
+    overflow-y: auto;
+}
+
+.scrollarea::-webkit-scrollbar {
+    display: none;
+}
+
+input[type=search] {
+    background: var(--bs-gray-100);
+}
