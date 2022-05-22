@@ -20,11 +20,11 @@
          </div>
          <form class="d-flex flex-column gap-3" action="signin.php" method="post">
             <div class="form-floating">
-               <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="email" placeholder="E-Mail-Adresse">
+               <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="loginEmail" placeholder="E-Mail-Adresse">
                <label for="floatingEmail">E-Mail-Adresse</label>
             </div>
             <div class="form-floating">
-               <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="password" placeholder="Passwort">
+               <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="loginPassword" placeholder="Passwort">
                <label for="floatingPassword">Passwort</label>
             </div>
             <button type="submit" name="login" class="btn btn-outline-primary">Anmelden</button>
@@ -41,20 +41,20 @@
          <div class="h1 align-self-center">
             Registrieren
          </div>
-         <form class="d-flex flex-column gap-3" action="php/signin.php" method="post">
+         <form class="d-flex flex-column gap-3" action="signin.php" method="post">
             <div class="form-floating">
-               <input class="form-control bg-transparent text-white" type="text" id="floatingUsername" name="username" placeholder="Benutzername">
+               <input class="form-control bg-transparent text-white" type="text" id="floatingUsername" name="registerUsername" placeholder="Benutzername">
                <label for="floatingUsername">Benutzername</label>
             </div>
             <div class="form-floating">
-               <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="email" placeholder="E-Mail-Adresse">
+               <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="registerEmail" placeholder="E-Mail-Adresse">
                <label for="floatingEmail">E-Mail-Adresse</label>
             </div>
             <div class="form-floating">
-               <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="password" placeholder="Passwort">
+               <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="registerPassword" placeholder="Passwort">
                <label for="floatingPassword">Passwort</label>
             </div>
-            <button type="submit" class="btn btn-outline-primary" name="register">Registrieren</button>
+            <button type="submit" name="register" class="btn btn-outline-primary">Registrieren</button>
          </form>
       </div>
    </div>

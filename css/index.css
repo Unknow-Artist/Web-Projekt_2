@@ -18,3 +18,22 @@ aside {
 input[type=search] {
     background: var(--bs-gray-100);
 }
+
+.chatbox {
+    height: calc(100vh - 55px);
+}
+
+.message {
+    width: 500px;
+    white-space: normal;
+}
+
+#contacts {
+    height: calc(100vh - 125px);
+    overflow-y: auto;
+    background: var(--bs-gray-100);
+}
+
+.search-group {
+    width: 500px;
+}
