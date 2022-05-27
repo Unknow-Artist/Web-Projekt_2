@@ -1,9 +1,9 @@
-<?php 
+<?php
 session_start();
 
-if(isset($_POST["login"]) && !empty($_POST["loginPassword"]) && !empty($_POST["loginEmail"])) {
-    $email = $_POST['loginEmail'];
-    $password = password_hash($_POST['loginPassword'], PASSWORD_DEFAULT);
+if (isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email"])) {
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     if (login($email, $password)) {
         $_SESSION['user_id'] = $user['id'];
@@ -11,5 +11,6 @@ if(isset($_POST["login"]) && !empty($_POST["loginPassword"]) && !empty($_POST["l
         header("Location: index.php");
     }
 }
+
 include_once('html/signin.html');
 ?>
