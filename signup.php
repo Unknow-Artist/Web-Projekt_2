@@ -10,7 +10,7 @@ if(isset($_POST['register']) && !empty($_POST['password']) && !empty($_POST['ema
 
     register($username, $password, $email);
 
-    $_SESSION["user_id"] = $db -> lastInsertId();
+    $_SESSION["user_id"] = getDb() -> lastInsertId();
     $_SESSION["username"] = $username;
     header('Location: index.php');
 }

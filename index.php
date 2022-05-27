@@ -1,7 +1,7 @@
 <?php
-if (!isUserLoggedIn()) header("Location: signin.php");
-require_once('php/functions.php');
 session_start();
+require_once('php/functions.php');
+if (!isUserLoggedIn()) header("Location: signin.php");
 
 $userData = getUserData($_SESSION["user_id"]);
 $conversation_id = 1;
