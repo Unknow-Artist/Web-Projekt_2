@@ -73,11 +73,13 @@ function parseTemplate($file, $searchArray) {
 	return $inhalt;
 }
 
-function getMessages() {
+function getMessages($conversation_id) {
 	$inhalt = "";
 	$db = getDb();
 
-	$messages = $db -> query("SELECT id, sender_id, created, text FROM message ORDER BY id DESC");
+	$messages = $db -> prepare("SELECT * FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
+	$messages -> bindParam(':conversation_id', $conversation_id);
+	$messages -> execute();
 
 	foreach ($messages as $message) {
 		$date = date_create($message["created"]);
@@ -95,20 +97,22 @@ function getMessages() {
 		if ($message["sender_id"] == $_SESSION["user_id"]) {
 			$alignment = 'align-self-end';
 			$color = 'text-bg-primary';
+			$border = 'border-radius: 15px 0 15px 15px;';
 		}
 		else {
 			$alignment = '';
 			$color = 'text-bg-secondary';
+			$border = 'border-radius: 0 15px 15px 15px;';
 		}
 
 		$userData = getUserData($message["sender_id"]);
 		$inhalt .= <<<MESSAGE
-		<div class="badge rounded-pill text-start px-4 py-2 message $alignment $color">
+		<div class="message px-3 py-2 $alignment $color" style="$border">
 			<div class="d-flex flex-row justify-content-between">
 				<strong>$userData[username]</strong>
 				<span>$created</span>
 			</div>
-			<p class="m-0 fw-normal">$message[text]</p>
+			<p class="m-0 fw-normal text-wrap">$message[text]</p>
 		</div>
 		MESSAGE;
 	}
@@ -119,18 +123,27 @@ function getContacts() {
 	$db = getDb();
 	$inhalt = "";
 
-	$contacts = $db -> query("SELECT id, username, email, type FROM user WHERE id != :id ORDER BY username ASC");
-	$contacts -> bindParam(':id', $_SESSION["user_id"]);
-	$contacts -> execute();
+	$conversations = $db -> prepare("SELECT * FROM conversation INNER JOIN group_member ON conversation.id = group_member.conversation_id WHERE group_member.user_id = :user_id");
+	$conversations -> bindParam(':user_id', $_SESSION["user_id"]);
+	$conversations -> execute();
 
-	foreach($contacts as $contact) {
-		$db -> prepare("SELECT * FROM message WHERE sender_id = :id ORDER BY id DESC LIMIT 1") -> execute([':id' => $contact["id"]]);
-		$lastMessage = $db -> fetch();
+	foreach($conversations as $conversation) {
+		$messages = $db -> prepare("SELECT sender_id, text FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC LIMIT 1");
+		$messages -> bindParam(':conversation_id', $conversation["conversation_id"]);
+		$messages -> execute();
+		$message = $messages -> fetch();
+
+		$sender = getUserData($message["sender_id"]);
+		$text = $sender["username"] . ": " . $message["text"];
+
+		if (strlen($message["text"]) > 32) {
+			$text = substr($text, 0, 32) . "...";
+		}
 
 		$inhalt .= <<<CONTACT
 		<div class="list-group-item list-group-item-action py-3">
-			<strong>$contact[username]</strong>
-			<p class="m-0">$lastMessage[text]</p>
+			<strong>$conversation[name]</strong>
+			<p class="m-0">$text</p>
 		</div>
 		CONTACT;
 	}

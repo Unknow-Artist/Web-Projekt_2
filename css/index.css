@@ -1,5 +1,21 @@
+body {
+    background: linear-gradient(45deg, #010101, #1f2833);
+}
+
+header {
+    box-shadow: 0px 0px 100px -20px #000;
+}
+
 .h1, .h2 {
     font-family: 'Kaushan Script', cursive;
+}
+
+.h1 {
+    font-size: 2rem;
+}
+
+.h2 {
+    font-size: 2rem;
 }
 
 aside {
@@ -20,18 +36,18 @@ input[type=search] {
 }
 
 .chatbox {
-    height: calc(100vh - 55px);
+    height: calc(100vh - 54px);
 }
 
 .message {
-    width: 500px;
-    white-space: normal;
+    min-width: 300px;
+    max-width: 600px;
 }
 
-#contacts {
-    height: calc(100vh - 125px);
+.contacts {
+    height: calc(100vh - 124px);
     overflow-y: auto;
-    background: var(--bs-gray-100);
+    background: var(--bs-gray-900);
 }
 
 .search-group {
