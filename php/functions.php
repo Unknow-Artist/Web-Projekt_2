@@ -11,29 +11,46 @@ function login($email, $password) {
     $statement -> execute();
     $user = $statement -> fetch();
 
-	if ($user !== false && password_verify($password, $user['password'])) {
-		$_SESSION['user_id'] = $user['id'];
-		$_SESSION['username'] = $user['username'];
-		return true;
-	} else {
+	return ($user !== false && password_verify($password, $user['password'])) ? $user : false;
+}
+
+function google_login($google_id) {
+	$statement = getDb() -> prepare("SELECT * FROM user WHERE google_id = :google_id");
+	$statement -> bindParam(':google_id', $google_id);
+	$statement -> execute();
+	$user = $statement -> fetch();
+
+	return $user !== false ? $user : false;
+
+	if ($user !== false) {
+		return $user;
+	}
+	else {
 		return false;
 	}
 }
 
-function register($email, $password, $username) {
-	$statement = getDb() -> prepare("INSERT INTO user (username, password, email) VALUES (:username, :password, :email)");
+function register($username, $password, $email) {
+	$db = getDb();
+	
+	if (empty($google_id)) {
+		$statement = getDb() -> prepare("INSERT INTO user (username, email, password, type) VALUES (:username, :email, :password, :type)");
+		$statement -> bindParam(':type', 'standard-user');
+	}
+	else {
+		$statement = getDb() -> prepare("INSERT INTO user (google_id, username, email, password, type) VALUES (:username, :email, :password, :google_id, :type)");
+		$statement -> bindParam(':type', 'google-user');
+	}
     $statement -> bindParam(':username', $username);
     $statement -> bindParam(':password', $password);
     $statement -> bindParam(':email', $email);
     $statement -> execute();
 
-	if ($statement -> rowCount() == 1) {
-		$_SESSION['user_id'] = $db -> lastInsertId();
-		$_SESSION['username'] = $username;
-		return true;
-	} else {
-		return false;
-	}
+	$last_id = getDb() -> lastInsertId();
+	$table = $db -> query("SELECT * FROM user WHERE id = $last_id");
+	$user = $table -> fetch();
+
+	return $statement -> rowCount() == 1 ? $user : false;
 }
 
 function isUserLoggedIn() {
@@ -41,10 +58,11 @@ function isUserLoggedIn() {
 }
 
 function getUserData($id) {
-	$statement = getDb() -> prepare("SELECT id, username, email FROM user WHERE id = :id");
+	$statement = getDb() -> prepare("SELECT * FROM user WHERE id = :id");
 	$statement -> bindParam(':id', $id);
 	$statement -> execute();
-	return $statement -> fetch();
+	$user = $statement -> fetch();
+	return $user;
 }
 
 function parseTemplate($file, $searchArray) {
@@ -56,11 +74,10 @@ function parseTemplate($file, $searchArray) {
 }
 
 function getMessages() {
-	require('php/db_inc.php');
-	require('php/connect.php');
-
 	$inhalt = "";
-	$messages = $db -> query("SELECT id, user_id, created, text FROM message ORDER BY id DESC");
+	$db = getDb();
+
+	$messages = $db -> query("SELECT id, sender_id, created, text FROM message ORDER BY id DESC");
 
 	foreach ($messages as $message) {
 		$date = date_create($message["created"]);
@@ -75,7 +92,7 @@ function getMessages() {
 			$created = date("d.m.Y", strtotime($message["created"]));
 		}
 
-		if ($message["user_id"] == $_SESSION["user_id"]) {
+		if ($message["sender_id"] == $_SESSION["user_id"]) {
 			$alignment = 'align-self-end';
 			$color = 'text-bg-primary';
 		}
@@ -84,7 +101,7 @@ function getMessages() {
 			$color = 'text-bg-secondary';
 		}
 
-		$userData = getUserData($message["user_id"]);
+		$userData = getUserData($message["sender_id"]);
 		$inhalt .= <<<MESSAGE
 		<div class="badge rounded-pill text-start px-4 py-2 message $alignment $color">
 			<div class="d-flex flex-row justify-content-between">
@@ -95,6 +112,29 @@ function getMessages() {
 		</div>
 		MESSAGE;
 	}
+	return $inhalt;
+}
+
+function getContacts() {
+	$db = getDb();
+	$inhalt = "";
+
+	$contacts = $db -> query("SELECT id, username, email, type FROM user WHERE id != :id ORDER BY username ASC");
+	$contacts -> bindParam(':id', $_SESSION["user_id"]);
+	$contacts -> execute();
+
+	foreach($contacts as $contact) {
+		$db -> prepare("SELECT * FROM message WHERE sender_id = :id ORDER BY id DESC LIMIT 1") -> execute([':id' => $contact["id"]]);
+		$lastMessage = $db -> fetch();
+
+		$inhalt .= <<<CONTACT
+		<div class="list-group-item list-group-item-action py-3">
+			<strong>$contact[username]</strong>
+			<p class="m-0">$lastMessage[text]</p>
+		</div>
+		CONTACT;
+	}
+
 	return $inhalt;
 }
 ?>
