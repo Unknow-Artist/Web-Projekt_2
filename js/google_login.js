@@ -23,8 +23,6 @@ window.onload = function () {
         document.getElementById("buttonDiv"),
         {
             ux_mode: "popup",
-            auto_select: false,
-            cancel_on_tap_outside: true,
             theme: "outline",
             size: "large",
             shape: "pill",
