@@ -69,6 +69,10 @@ main {
     max-width: 600px;
 }
 
+.message .text {
+    
+}
+
 #message-input {
     padding: 0 10px;
     background: #333;

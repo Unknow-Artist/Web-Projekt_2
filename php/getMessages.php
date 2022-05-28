@@ -36,6 +36,7 @@ foreach ($messages as $message) {
 			<span>$created</span>
 		</div>
 		<p class="m-0 fw-normal text-wrap">$message[text]</p>
+		$deleteButton
 	</div>
 	MESSAGE;
 }
