@@ -1,7 +1,7 @@
 <?php
 function getDb() {
-	require 'php/db_inc.php';
-	require 'php/connect.php';
+	require __DIR__ . '/db_inc.php';
+	require __DIR__ . '/connect.php';
 	return $db;
 }
 
