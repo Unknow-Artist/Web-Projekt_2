@@ -6,7 +6,7 @@ function getDb() {
 }
 
 function login($email, $password) {
-	$statement = getDb() -> prepare("SELECT * FROM user WHERE email = :email");
+	$statement = getDb() -> prepare("SELECT password FROM user WHERE email = :email");
 	$statement -> bindParam(':email', $email);
     $statement -> execute();
     $user = $statement -> fetch();
@@ -15,19 +15,12 @@ function login($email, $password) {
 }
 
 function google_login($google_id) {
-	$statement = getDb() -> prepare("SELECT * FROM user WHERE google_id = :google_id");
+	$statement = getDb() -> prepare("SELECT id, username FROM user WHERE google_id = :google_id");
 	$statement -> bindParam(':google_id', $google_id);
 	$statement -> execute();
 	$user = $statement -> fetch();
 
 	return $user !== false ? $user : false;
-
-	if ($user !== false) {
-		return $user;
-	}
-	else {
-		return false;
-	}
 }
 
 function register($username, $password, $email) {
@@ -54,15 +47,15 @@ function register($username, $password, $email) {
 }
 
 function isUserLoggedIn() {
-	return (empty($_SESSION["user_id"]) && empty($_SESSION["username"])) ? false : true;
+	return (empty($_COOKIE["user_id"]) && empty($_COOKIE["username"])) ? false : true;
 }
 
 function getUserData($id) {
-	$statement = getDb() -> prepare("SELECT * FROM user WHERE id = :id");
+	$statement = getDb() -> prepare("SELECT username FROM user WHERE id = :id");
 	$statement -> bindParam(':id', $id);
 	$statement -> execute();
 	$user = $statement -> fetch();
-	return $user;
+	return $user !== false ? $user : null;
 }
 
 function parseTemplate($file, $searchArray) {
@@ -70,84 +63,6 @@ function parseTemplate($file, $searchArray) {
     for ($i = 0; $i < count($searchArray); $i++) {
         $inhalt = str_replace($searchArray[$i][0], $searchArray[$i][1], $inhalt);
     }
-	return $inhalt;
-}
-
-function getMessages($conversation_id) {
-	$inhalt = "";
-	$db = getDb();
-
-	$messages = $db -> prepare("SELECT * FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
-	$messages -> bindParam(':conversation_id', $conversation_id);
-	$messages -> execute();
-
-	foreach ($messages as $message) {
-		$date = date_create($message["created"]);
-		$today = date_create(date("Y-m-d"));
-		$diff = date_diff($date, $today);
-		$diff = $diff -> format("%a");
-
-		if ($diff == 0) {
-			$created = "Heute um " . date("H:i", strtotime($message["created"]));
-		}
-		else {
-			$created = date("d.m.Y", strtotime($message["created"]));
-		}
-
-		if ($message["sender_id"] == $_SESSION["user_id"]) {
-			$alignment = 'align-self-end';
-			$color = 'text-bg-primary';
-			$border = 'border-radius: 15px 0 15px 15px;';
-		}
-		else {
-			$alignment = '';
-			$color = 'text-bg-secondary';
-			$border = 'border-radius: 0 15px 15px 15px;';
-		}
-
-		$userData = getUserData($message["sender_id"]);
-		$inhalt .= <<<MESSAGE
-		<div class="message px-3 py-2 $alignment $color" style="$border">
-			<div class="d-flex flex-row justify-content-between">
-				<strong>$userData[username]</strong>
-				<span>$created</span>
-			</div>
-			<p class="m-0 fw-normal text-wrap">$message[text]</p>
-		</div>
-		MESSAGE;
-	}
-	return $inhalt;
-}
-
-function getContacts() {
-	$db = getDb();
-	$inhalt = "";
-
-	$conversations = $db -> prepare("SELECT * FROM conversation INNER JOIN group_member ON conversation.id = group_member.conversation_id WHERE group_member.user_id = :user_id");
-	$conversations -> bindParam(':user_id', $_SESSION["user_id"]);
-	$conversations -> execute();
-
-	foreach($conversations as $conversation) {
-		$messages = $db -> prepare("SELECT sender_id, text FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC LIMIT 1");
-		$messages -> bindParam(':conversation_id', $conversation["conversation_id"]);
-		$messages -> execute();
-		$message = $messages -> fetch();
-
-		$sender = getUserData($message["sender_id"]);
-		$text = $sender["username"] . ": " . $message["text"];
-
-		if (strlen($message["text"]) > 32) {
-			$text = substr($text, 0, 32) . "...";
-		}
-
-		$inhalt .= <<<CONTACT
-		<div class="list-group-item list-group-item-action py-3">
-			<strong>$conversation[name]</strong>
-			<p class="m-0">$text</p>
-		</div>
-		CONTACT;
-	}
-
 	return $inhalt;
 }
 ?>

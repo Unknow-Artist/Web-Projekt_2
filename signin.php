@@ -1,7 +1,11 @@
 <?php
 session_start();
 
-require_once 'php/functions.php';
+require_once __DIR__ . '/php/functions.php';
+
+if (isset($_COOKIE["user_id"]) && isset($_COOKIE["username"])) {
+    header("Location: index.php");
+}
 
 if (isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email"])) {
     $email = $_POST['email'];
@@ -9,8 +13,9 @@ if (isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email
 
     if (login($email, $password)) {
         $user = login($email, $password);
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+        setcookie("user_id", $user["id"], time() + (86400 * 30));
+        setcookie("username", $user["username"], time() + (86400 * 30));
+        setcookie("selected_conversation", 1, time() + (86400 * 30));
         header("Location: index.php");
     }
 }
@@ -22,8 +27,9 @@ if(!empty($_POST["google_id"]) && !empty($_POST["google_name"]) && !empty($_POST
 
     if (google_login($google_id)) {
         $user = google_login($google_id);
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
+        setcookie("user_id", $user["id"], time() + (86400 * 30));
+        setcookie("username", $user["username"], time() + (86400 * 30));
+        setcookie("selected_conversation", 1, time() + (86400 * 30));
         header("Location: index.php");
     }
 }

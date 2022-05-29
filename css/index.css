@@ -69,8 +69,21 @@ main {
     max-width: 600px;
 }
 
-.message .text {
-    
+.message:hover span {
+    display: none;
+}
+
+.message #editButtons {
+    display: none;
+}
+
+.message:hover #editButtons {
+    display: block;
+}
+
+.message:hover #editButtons i {
+    padding: 0 5px;
+    cursor: pointer;
 }
 
 #message-input {

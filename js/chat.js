@@ -1,23 +1,21 @@
-var conversation_id = 1;
-let listItems = document.getElementsByClassName("list-group-item");
+updateApplication(1);
 
-updateMessages(conversation_id);
-
-for(let i = 0; i < listItems.length; i++) {
-    listItems[i].addEventListener("click", highlightListItem);
+function updateApplication() {
+    requestData('php/getContacts.php', 'contacts');
+    requestData('php/getMessages.php', 'chat-messages');
 }
 
-function highlightListItem() {
-    for(let i = 0; i < listItems.length; i++) {
-        listItems[i].classList.remove("active");
-    }
-    this.classList.add("active");
-    updateMessages(1);
+function sendMessage(message) {
+	if (message != null && message != '') {
+	console.log(message);
+	updateApplication();
+	}
 }
 
-function updateMessages(conversation_id) {
-    requestData('php/getMessages.php?id=' + conversation_id, 'chat-messages');
-};
+function switchChatGroup(id) {
+	document.cookie = "selected_conversation =" + id;
+	updateApplication();
+}
 
 function requestData(quelle, ziel, fehlermeldung = 'Fehler') {
 	fetch(quelle)

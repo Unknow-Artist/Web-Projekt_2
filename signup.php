@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'php/functions.php';
+require_once __DIR__ . '/php/functions.php';
 
 if(isset($_POST['register']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['username'])) {
     $email = htmlentities($_POST['registerEmail']);

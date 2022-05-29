@@ -19,20 +19,23 @@ window.onload = function () {
         client_id: "843031511733-8c8qd8eh5vugf0m3ujaitsc43lcbaipp.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
-    google.accounts.id.renderButton(
-        document.getElementById("buttonDiv"),
-        {
-            ux_mode: "popup",
-            theme: "outline",
-            size: "large",
-            shape: "pill",
-            logo_alignment: "center",
-            locale: "de-CH"
-        }  // customization attributes
-    );
-    google.accounts.id.prompt(); // also display the One Tap dialog
-}
-
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            {
+                ux_mode: "popup",
+                theme: "outline",
+                size: "large",
+                shape: "pill",
+                logo_alignment: "center",
+                locale: "de-CH"
+            }
+        );
+      }
+    });
+  };
+  
 function post(path, params, method='post') {
     const form = document.createElement('form');
     form.method = method;
