@@ -86,16 +86,16 @@ main {
     cursor: pointer;
 }
 
-#message-input {
+#send-form {
     padding: 0 10px;
     background: #333;
 }
 
-#message-input > input[type="text"] {
+#send-input {
     background-color: #222;
     color: #fff;
 }
 
-#message-input > input[type="text"]::placeholder {
+#send-input::placeholder {
     color: #aaa;
 }

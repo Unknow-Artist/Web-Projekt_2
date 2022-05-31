@@ -6,39 +6,49 @@ require_once __DIR__ . '/functions.php';
 $db = getDb();
 $conversation_id = $_COOKIE["selected_conversation"];
 
-$messages = $db -> prepare("SELECT sender_id, text, created FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
+$messages = $db -> prepare("SELECT id, sender_id, text, created FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
 $messages -> bindParam(':conversation_id', $conversation_id);
 $messages -> execute();
 
 foreach ($messages as $message) {
-	$diff = date_diff(date_create($message["created"]), date_create(date("Y-m-d"))) -> format("%a");
-	if ($diff == 0) $created = "Heute um " . date("H:i", strtotime($message["created"]));
-	else $created = date("d.m.Y", strtotime($message["created"]));
+	$user = getUserById($message["sender_id"]);
 
-	if ($message["sender_id"] == $_COOKIE["user_id"]) {
-		$alignment = 'align-self-end';
-		$color = 'text-bg-primary';
-		$border = 'border-radius: 15px 0 15px 15px;';
-		$editButtons = '<div id="editButtons"><i class="bi bi-pencil"></i><i class="bi bi-trash"></i></div>';
+	$date = date("d.m.Y", strtotime($message["created"]));
+	$time = date("H:i", strtotime($message["created"]));
+	// check if date is today
+	if (date("d.m.Y", strtotime($message["created"])) == date("d.m.Y")) {
+		$date = "Heute um " . $time;
+	}
+	// check if date was yesterday
+	else if (date("d.m.Y", strtotime($message["created"])) == date("d.m.Y", strtotime("-1 day"))) {
+		$date = "Gestern um " . $time;
+	}
+
+	if ($message["sender_id"] == $_SESSION["user_id"]) {
+		echo <<<MESSAGE
+		<div class="message px-3 py-2 align-self-end text-bg-primary" style="border-radius: 15px 0 15px 15px;">
+			<div class="d-flex flex-row justify-content-between">
+				<strong>$user[username]</strong>
+				<span class="hide">$date</span>
+				<div id="editButtons">
+					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]")">
+					</i><i class="bi bi-trash" onclick="console.log("trash id: $message[id]")"></i>
+				</div>
+			</div>
+			<p class="m-0 fw-normal text-wrap">$message[text]</p>
+		</div>
+		MESSAGE;
 	}
 	else {
-		$alignment = '';
-		$color = 'text-bg-secondary';
-		$border = 'border-radius: 0 15px 15px 15px;';
-		$editButtons = '';
-	}
-
-	$userData = getUserData($message["sender_id"]);
-
-	echo <<<MESSAGE
-	<div class="message px-3 py-2 $alignment $color" style="$border">
-		<div class="d-flex flex-row justify-content-between">
-			<strong>$userData[username]</strong>
-			<span>$created</span>
-			$editButtons
+		echo <<<MESSAGE
+		<div class="message px-3 py-2 align-self-start text-bg-secondary" style="border-radius: 0 15px 15px 15px;">
+			<div class="d-flex flex-row justify-content-between">
+				<strong>$user[username]</strong>
+				<span>$date</span>
+			</div>
+			<p class="m-0 fw-normal text-wrap">$message[text]</p>
 		</div>
-		<p class="m-0 fw-normal text-wrap">$message[text]</p>
-	</div>
-	MESSAGE;
+		MESSAGE;
+	}
 }
 ?>
