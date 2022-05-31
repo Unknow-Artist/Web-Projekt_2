@@ -1,19 +1,39 @@
 updateApplication(1);
 
+const form = document.getElementById('send-form');
+const inputField = document.getElementById('send-input');
+const submitButton = document.getElementById('send-button');
+
+form.addEventListener('submit', function(event) {
+	event.preventDefault();
+
+	if (inputField.value.length === 0) return;
+	
+	const formData = new FormData(this);
+	const url = this.action;
+	const method = this.method;
+
+	fetch(url, {
+		method: method,
+		body: formData
+	});
+
+	inputField.value = '';
+});
+
+inputField.addEventListener('keypress', function(event) {
+	event.preventDefault();
+	if (event.key == 'Enter') {
+		submitButton.click();
+	}
+});
+
 function updateApplication() {
     requestData('php/getContacts.php', 'contacts');
     requestData('php/getMessages.php', 'chat-messages');
 }
 
-function sendMessage(message) {
-	if (message != null && message != '') {
-	console.log(message);
-	updateApplication();
-	}
-}
-
 function switchChatGroup(id) {
-	document.cookie = "selected_conversation =" + id;
 	updateApplication();
 }
 
