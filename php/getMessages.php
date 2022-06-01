@@ -1,10 +1,11 @@
 <?php
+
 session_start();
 
 require_once __DIR__ . '/functions.php';
 
 $db = getDb();
-$conversation_id = $_COOKIE["selected_conversation"];
+$conversation_id = $_SESSION['conversation_id'];
 
 $messages = $db -> prepare("SELECT id, sender_id, text, created FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
 $messages -> bindParam(':conversation_id', $conversation_id);
@@ -15,12 +16,10 @@ foreach ($messages as $message) {
 
 	$date = date("d.m.Y", strtotime($message["created"]));
 	$time = date("H:i", strtotime($message["created"]));
-	// check if date is today
+
 	if (date("d.m.Y", strtotime($message["created"])) == date("d.m.Y")) {
 		$date = "Heute um " . $time;
-	}
-	// check if date was yesterday
-	else if (date("d.m.Y", strtotime($message["created"])) == date("d.m.Y", strtotime("-1 day"))) {
+	} else if (date("d.m.Y", strtotime($message["created"])) == date("d.m.Y", strtotime("-1 day"))) {
 		$date = "Gestern um " . $time;
 	}
 
@@ -38,8 +37,7 @@ foreach ($messages as $message) {
 			<p class="m-0 fw-normal text-wrap">$message[text]</p>
 		</div>
 		MESSAGE;
-	}
-	else {
+	} else {
 		echo <<<MESSAGE
 		<div class="message px-3 py-2 align-self-start text-bg-secondary" style="border-radius: 0 15px 15px 15px;">
 			<div class="d-flex flex-row justify-content-between">

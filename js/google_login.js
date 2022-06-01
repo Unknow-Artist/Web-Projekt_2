@@ -34,7 +34,7 @@ window.onload = function () {
         );
       }
     });
-  };
+  }
   
 function post(path, params, method='post') {
     const form = document.createElement('form');

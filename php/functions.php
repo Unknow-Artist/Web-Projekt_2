@@ -6,9 +6,8 @@ function getDb() {
 }
 
 function login($email, $password) {
-	$statement = getDb() -> prepare("SELECT password FROM user WHERE email = :email");
-	$statement -> bindParam(':email', $email);
-    $statement -> execute();
+	$statement = getDb() -> prepare("SELECT id, username, password FROM user WHERE email = :email");
+    $statement -> execute([':email' => $email]);
     $user = $statement -> fetch();
 
 	return ($user !== false && password_verify($password, $user['password'])) ? $user : false;
@@ -16,8 +15,7 @@ function login($email, $password) {
 
 function google_login($google_id) {
 	$statement = getDb() -> prepare("SELECT id, username FROM user WHERE google_id = :google_id");
-	$statement -> bindParam(':google_id', $google_id);
-	$statement -> execute();
+	$statement -> execute([':google_id' => $google_id]);
 	$user = $statement -> fetch();
 
 	return $user !== false ? $user : false;
@@ -25,25 +23,11 @@ function google_login($google_id) {
 
 function register($username, $password, $email) {
 	$db = getDb();
-	
-	if (empty($google_id)) {
-		$statement = $db -> prepare("INSERT INTO user (username, email, password, type) VALUES (:username, :email, :password, :type)");
-		$statement -> bindParam(':type', 'standard-user');
-	}
-	else {
-		$statement = $db -> prepare("INSERT INTO user (google_id, username, email, password, type) VALUES (:username, :email, :password, :google_id, :type)");
-		$statement -> bindParam(':type', 'google-user');
-	}
-    $statement -> bindParam(':username', $username);
-    $statement -> bindParam(':password', $password);
-    $statement -> bindParam(':email', $email);
-    $statement -> execute();
 
-	$last_id = $db -> lastInsertId();
-	$table = $db -> query("SELECT * FROM user WHERE id = $last_id");
-	$user = $table -> fetch();
+	$statement = $db -> prepare("INSERT INTO user (username, email, password) VALUES (:username, :email, :password)");
+    $statement -> execute([':username' => $username, ':email' => $email, ':password' => password_hash($password, PASSWORD_DEFAULT)]);
 
-	return $statement -> rowCount() == 1 ? $user : false;
+	return $statement -> rowCount() == 1 ? true : false;
 }
 
 function getUserById($id) {
@@ -52,5 +36,13 @@ function getUserById($id) {
 	$user = $statement -> fetch();
 	
 	return $user !== false ? $user : false;
+}
+
+function getConversationId($user_id) {
+	$statement = getDb() -> prepare("SELECT conversation_id FROM group_member WHERE user_id = :user_id");
+	$statement -> execute([':user_id' => $user_id]);
+	$conversation_id = $statement -> fetch();
+	
+	return $conversation_id !== false ? $conversation_id : false;
 }
 ?>

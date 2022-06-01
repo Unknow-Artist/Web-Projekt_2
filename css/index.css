@@ -26,7 +26,7 @@ aside > .h2 {
     height: 70px;
 }
 
-aside > .scrollarea {
+aside {
     background: rgb(23, 23, 29);
 }
 
@@ -69,7 +69,7 @@ main {
     max-width: 600px;
 }
 
-.message:hover span {
+.message:hover .hide {
     display: none;
 }
 

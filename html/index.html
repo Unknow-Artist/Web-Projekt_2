@@ -31,16 +31,21 @@
                 Chat
             </div>
             <div class="list-group list-group-flush h-100 scrollarea" id="contacts"></div>
+            <form class="input-group py-3 px-2" id="new-form" action="php/createConversation.php" method="post">
+                <input class="form-control" type="text" name="name" placeholder="Neuen Chat erstellen" id="new-input">
+                <button type="submit" class="btn btn-secondary" id="new-button"><i class="bi bi-plus-lg"></i></button>
+            </form>
         </aside>
         <div class="d-flex flex-column w-100 chatbox">
             <div class="d-flex flex-column-reverse gap-3 px-3 h-100 scrollarea" id="chat-messages"></div>
-            <form class="input-group border-top p-2 py-3 mt-3" id="send-form" action="index.php" method="post">
+            <form class="input-group border-top p-2 py-3 mt-3" id="send-form" action="php/sendMessage.php" method="post">
                 <input type="text" class="form-control" name="message" id="send-input" placeholder="Nachricht schreiben..." aria-label="Nachricht" aria-describedby="button-senden" autofocus>
                 <button type="submit" class="btn btn-secondary" name="sendMessage" id="send-button"><i class="bi bi-send-fill"></i></button>
             </form>
         </div>
     </main>
-    <script src="js/chat.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/send.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
 </html>

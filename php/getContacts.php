@@ -32,7 +32,7 @@ foreach($conversations as $conversation) {
     }
 
     echo <<<CONTACT
-    <div class="list-group-item list-group-item-action py-3 chat-group $active" onClick="switchChatGroup($conversation[conversation_id])">
+    <div class="list-group-item list-group-item-action py-3 chat-group $active" onClick="switchChat($conversation[conversation_id])">
         <strong>$conversation[name]</strong>
         <p class="m-0">$text</p>
     </div>
