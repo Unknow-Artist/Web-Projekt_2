@@ -1,5 +1,5 @@
 updateApplication();
-setInterval(updateApplication, 1000);
+//setInterval(updateApplication, 1000);
 
 function updateApplication() {
     requestData('php/getContacts.php', 'contacts');
@@ -75,11 +75,10 @@ document.getElementById('new-form').addEventListener('submit', function(event) {
 
 document.getElementById('search-input').addEventListener('input', function() {
 	const inputField = document.getElementById('search-input');
+	requestData('php/search.php?username=' + inputField.value, 'search-results');
+});
 
-	if (inputField.value.length === 0) {
-		document.getElementById('search-results').innerHTML = '';
-		return;
-	}
-
+document.getElementById('search-input').addEventListener('click', function() {
+	const inputField = document.getElementById('search-input');
 	requestData('php/search.php?username=' + inputField.value, 'search-results');
 });

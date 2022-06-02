@@ -8,8 +8,7 @@ $db = getDb();
 $conversation_id = $_SESSION['conversation_id'];
 
 $messages = $db -> prepare("SELECT id, sender_id, text, created FROM message WHERE conversation_id = :conversation_id ORDER BY id DESC");
-$messages -> bindParam(':conversation_id', $conversation_id);
-$messages -> execute();
+$messages -> execute([':conversation_id' => $conversation_id]);
 
 foreach ($messages as $message) {
 	$user = getUserById($message["sender_id"]);
@@ -30,8 +29,8 @@ foreach ($messages as $message) {
 				<strong>$user[username]</strong>
 				<span class="hide">$date</span>
 				<div id="editButtons">
-					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]")">
-					</i><i class="bi bi-trash" onclick="console.log("trash id: $message[id]")"></i>
+					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]");">
+					</i><i class="bi bi-trash" onclick="console.log("trash id: $message[id]");"></i>
 				</div>
 			</div>
 			<p class="m-0 fw-normal text-wrap">$message[text]</p>

@@ -14,8 +14,21 @@ header {
 }
 
 .search-group {
+    position: relative;
     height: 38px;
     width: 500px;
+}
+
+#search-results {
+    color: white;
+    position: absolute;
+    top: 60px;
+    right: 58px;
+    width: 459px;
+}
+
+#search-results li i {
+    cursor: pointer;
 }
 
 aside {
