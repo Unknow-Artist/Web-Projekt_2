@@ -1,6 +1,6 @@
 function handleCredentialResponse(response) {
     payload = parseJwt(response.credential);
-    post('signin.php', {google_id: payload.sub, google_name: payload.name, google_email: payload.email});
+    post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
 }
 
 function parseJwt(token) {
@@ -19,21 +19,18 @@ window.onload = function () {
         client_id: "843031511733-8c8qd8eh5vugf0m3ujaitsc43lcbaipp.apps.googleusercontent.com",
         callback: handleCredentialResponse
     });
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        google.accounts.id.renderButton(
-            document.getElementById("buttonDiv"),
-            {
-                ux_mode: "popup",
-                theme: "outline",
-                size: "large",
-                shape: "pill",
-                logo_alignment: "center",
-                locale: "de-CH"
-            }
-        );
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      {
+          ux_mode: "popup",
+          theme: "outline",
+          size: "large",
+          shape: "pill",
+          logo_alignment: "center",
+          locale: "de-CH"
       }
-    });
+    );
+    google.accounts.id.prompt();
   }
   
 function post(path, params, method='post') {

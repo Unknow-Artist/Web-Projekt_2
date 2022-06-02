@@ -60,7 +60,26 @@ document.getElementById('new-form').addEventListener('submit', function(event) {
 	fetch(url, {
 		method: method,
 		body: formData
+	})
+	.then(respone => {
+		if (respone.ok) {
+			return respone.text();
+		}
+		else {
+			throw new Error('Fehler');
+		}
 	});
 
 	inputField.value = '';
+});
+
+document.getElementById('search-input').addEventListener('input', function() {
+	const inputField = document.getElementById('search-input');
+
+	if (inputField.value.length === 0) {
+		document.getElementById('search-results').innerHTML = '';
+		return;
+	}
+
+	requestData('php/search.php?username=' + inputField.value, 'search-results');
 });

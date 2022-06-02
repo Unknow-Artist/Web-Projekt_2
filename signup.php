@@ -9,7 +9,10 @@ if(isset($_POST['register']) && !empty($_POST['password']) && !empty($_POST['ema
     $username = htmlentities($_POST['username']);
 
     if(register($username, $password, $email)) {
-        header('Location: signin.php');
+        $_SESSION['user_id'] = getDb() -> lastInsertId();
+        $_SESSION['username'] = $username;
+        $_SESSION['conversation_id'] = getConversationId($_SESSION['user_id']);
+        header('Location: index.php');
     }
 }
 
