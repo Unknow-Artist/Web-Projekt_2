@@ -1,17 +1,18 @@
 body {
     width: 100%;
     min-height: 100vh;
-    background-image: url('../img/bg.jpg');
+    background-image: url('../img/bg-2.jpg');
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: contain;
-    backdrop-filter: blur(5px);
+    background-size: cover;
+    backdrop-filter: blur(3px);
     /* linear-gradient(45deg, #010101, #1f2833) */
 }
 
 .content {
     width: 480px;
     padding: 40px;
+    background-color: hsla(0, 0%, 0%, 0.3) !important;
 }
 
 .h1 {
