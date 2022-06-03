@@ -1,7 +1,6 @@
 function handleCredentialResponse(response) {
     payload = parseJwt(response.credential);
-    console.log(payload);
-    //post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
+    post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
 }
 
 function parseJwt(token) {
@@ -24,12 +23,13 @@ window.onload = function () {
     google.accounts.id.renderButton(
       document.getElementById("buttonDiv"),
       {
-          ux_mode: "popup",
-          theme: "outline",
-          size: "large",
-          shape: "pill",
-          locale: "de-CH",
-          width: "400"
+        text: "signin_with",
+        ux_mode: "popup",
+        theme: "outline",
+        size: "large",
+        shape: "pill",
+        locale: "de-CH",
+        width: "400"
       }
     );
     google.accounts.id.prompt();

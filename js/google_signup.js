@@ -1,6 +1,6 @@
 function handleCredentialResponse(response) {
     payload = parseJwt(response.credential);
-    post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
+    post('signun.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
 }
 
 function parseJwt(token) {
@@ -23,9 +23,7 @@ window.onload = function () {
     google.accounts.id.renderButton(
         document.getElementById("buttonDiv"),
         {
-          text: "signup_with",
-          size: "medium",
-          shape: "pill"
+          text: "signup_with"
         }
       );
     google.accounts.id.prompt();
