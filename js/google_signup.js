@@ -27,7 +27,7 @@ window.onload = function () {
           size: "large",
           shape: "pill",
           logo_alignment: "center",
-          locale: "de-CH"
+          locale: "de-CH",
       }
     );
     google.accounts.id.prompt();
