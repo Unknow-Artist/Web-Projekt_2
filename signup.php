@@ -16,5 +16,18 @@ if(isset($_POST['register']) && !empty($_POST['password']) && !empty($_POST['ema
     }
 }
 
+if(!empty($_POST['google_id']) && !empty($_POST['google_name']) && !empty($_POST['google_email'])) {
+    $google_id = htmlentities($_POST['google_id']);
+    $username = htmlentities($_POST['google_name']);
+    $email = htmlentities($_POST['google_email']);
+
+    if(google_register($google_id, $username, $email)) {
+        $_SESSION['user_id'] = getDb() -> lastInsertId();
+        $_SESSION['username'] = $username;
+        $_SESSION['conversation_id'] = getConversationId($_SESSION['user_id']);
+        header('Location: index.php');
+    }
+}
+
 include_once('html/signup.html');
 ?>

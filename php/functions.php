@@ -34,6 +34,15 @@ function register($username, $password, $email) {
 	return $statement -> rowCount() == 1 ? true : false;
 }
 
+function google_register($google_id, $username, $email) {
+	$db = getDb();
+
+	$statement = $db -> prepare("INSERT INTO user (google_id, username, email, type) VALUES (:google_id, :username, :email, :type)");
+	$statement -> execute([':google_id' => $google_id, ':username' => $username, ':email' => $email, ':type' => 'google']);
+
+	return $statement -> rowCount() == 1 ? true : false;
+}
+
 function getUserById($id) {
 	$statement = getDb() -> prepare("SELECT username FROM user WHERE id = :id");
 	$statement -> execute([':id' => $id]);

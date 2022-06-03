@@ -25,11 +25,9 @@ window.onload = function () {
       {
         text: "signin_with",
         ux_mode: "popup",
-        theme: "outline",
-        size: "large",
         shape: "pill",
-        locale: "de-CH",
-        width: "400"
+        width: "400",
+        locale: "en-US"
       }
     );
     google.accounts.id.prompt();
