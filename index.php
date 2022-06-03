@@ -8,4 +8,6 @@ if (empty($_SESSION['user_id']) && empty($_SESSION["username"]) && empty($_SESSI
     exit;
 }
 
+echo getConversationId($_SESSION['user_id']);
+
 include_once('html/index.html');

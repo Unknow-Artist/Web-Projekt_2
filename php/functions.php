@@ -54,10 +54,10 @@ function getUserById($id) {
 }
 
 function getConversationId($user_id) {
-	$statement = getDb() -> prepare("SELECT conversation_id FROM group_member WHERE user_id = :user_id");
+	$statement = getDb() -> prepare("SELECT conversation_id FROM group_member WHERE user_id = :user_id LIMIT 1");
 	$statement -> execute([':user_id' => $user_id]);
 	$conversation_id = $statement -> fetch();
 	
-	return $conversation_id !== false ? $conversation_id : 0;
+	return $conversation_id !== false ? $conversation_id['conversation_id'] : 0;
 }
 ?>
