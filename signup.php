@@ -8,8 +8,9 @@ if(isset($_POST['register']) && !empty($_POST['password']) && !empty($_POST['ema
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $username = htmlentities($_POST['username']);
 
-    if(register($username, $password, $email)) {
-        $_SESSION['user_id'] = getDb() -> lastInsertId();
+    $user_id = register($username, $password, $email);
+    if($user_id !== false) {
+        $_SESSION['user_id'] = $user_id;
         $_SESSION['username'] = $username;
         $_SESSION['conversation_id'] = getConversationId($_SESSION['user_id']);
         header('Location: index.php');
@@ -21,8 +22,9 @@ if(!empty($_POST['google_id']) && !empty($_POST['google_name']) && !empty($_POST
     $username = htmlentities($_POST['google_name']);
     $email = htmlentities($_POST['google_email']);
 
-    if(google_register($google_id, $username, $email)) {
-        $_SESSION['user_id'] = getDb() -> lastInsertId();
+    $user_id = google_register($google_id, $username, $email);
+    if($user_id !== false) {
+        $_SESSION['user_id'] = $user_id;
         $_SESSION['username'] = $username;
         $_SESSION['conversation_id'] = getConversationId($_SESSION['user_id']);
         header('Location: index.php');
