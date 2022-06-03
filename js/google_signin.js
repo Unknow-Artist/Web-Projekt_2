@@ -23,12 +23,11 @@ window.onload = function () {
     google.accounts.id.renderButton(
       document.getElementById("buttonDiv"),
       {
-          ux_mode: "popup",
-          theme: "outline",
-          size: "large",
-          shape: "pill",
-          locale: "de-CH",
-          width: "400"
+        text: "signin_with",
+        ux_mode: "popup",
+        shape: "pill",
+        width: "400",
+        locale: "en-US"
       }
     );
     google.accounts.id.prompt();

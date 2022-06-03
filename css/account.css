@@ -5,8 +5,7 @@ body {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
-    backdrop-filter: blur(3px);
-    /* linear-gradient(45deg, #010101, #1f2833) */
+    backdrop-filter: blur(0px);
 }
 
 .content {

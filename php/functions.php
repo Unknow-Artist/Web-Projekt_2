@@ -30,8 +30,19 @@ function register($username, $password, $email) {
 
 	$statement = $db -> prepare("INSERT INTO user (username, email, password) VALUES (:username, :email, :password)");
     $statement -> execute([':username' => $username, ':email' => $email, ':password' => $password]);
+	$user_id = $db -> lastInsertId();
 
-	return $statement -> rowCount() == 1 ? true : false;
+	return $statement -> rowCount() == 1 ? $user_id : false;
+}
+
+function google_register($google_id, $username, $email) {
+	$db = getDb();
+
+	$statement = $db -> prepare("INSERT INTO user (google_id, username, email, type) VALUES (:google_id, :username, :email, :type)");
+	$statement -> execute([':google_id' => $google_id, ':username' => $username, ':email' => $email, ':type' => 'google']);
+	$user_id = $db -> lastInsertId();
+
+	return $statement -> rowCount() == 1 ? $user_id : false;
 }
 
 function getUserById($id) {
