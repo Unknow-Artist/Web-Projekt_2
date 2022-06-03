@@ -42,8 +42,16 @@
           <div class="text-center mx-3">oder</div>
           <span class="hr"></span>
        </div>
-       <a class="btn btn-outline-primary" href="signin.php">Anmelden</a>
+       <div id="buttonDiv"></div>
+
+      <div class="text-center mt-3">
+         Du hast kein Konto?
+         <a href="signup.php">Jetzt Registrieren</a>
+      </div>
+   </div>
     </div>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+   <script src="https://accounts.google.com/gsi/client" async defer></script>
+   <script src="js/google_login.js"></script>
  </body>
 </html>
