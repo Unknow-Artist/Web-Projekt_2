@@ -12,7 +12,8 @@ body {
 .content {
     width: 480px;
     padding: 40px;
-    background-color: hsla(0, 0%, 0%, 0.3) !important;
+    background-color: hsla(0, 0%, 10%, 0.5) !important;
+    box-shadow: 0 0 80px -40px #000;
 }
 
 .h1 {
