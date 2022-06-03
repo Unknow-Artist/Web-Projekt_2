@@ -20,9 +20,10 @@ header {
 
 #search-results {
     position: absolute;
-    width: 500px;
+    width: 459px;
     top: 58px;
-    right: 50px;
+    right: 58px;
+    z-index: 2;
 }
 
 aside {

@@ -80,6 +80,16 @@ document.getElementById('search-input').addEventListener('input', function() {
 		document.getElementById('search-results').innerHTML = '';
 		return;
 	}
-	
+
 	requestData('php/search.php?username=' + inputField.value, 'search-results');
+});
+
+document.getElementById('search-input').addEventListener('focus', function() {
+	const inputField = document.getElementById('search-input');
+
+	requestData('php/search.php?username=' + inputField.value, 'search-results');
+});
+
+document.getElementById('search-input').addEventListener('focusout', function() {
+	document.getElementById('search-results').innerHTML = '';
 });
