@@ -1,6 +1,7 @@
 function handleCredentialResponse(response) {
     payload = parseJwt(response.credential);
-    post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
+    console.log(payload);
+    //post('signin.php', {google_id: payload.sub, google_name: payload.given_name, google_email: payload.email});
 }
 
 function parseJwt(token) {

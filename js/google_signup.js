@@ -23,13 +23,9 @@ window.onload = function () {
     google.accounts.id.renderButton(
         document.getElementById("buttonDiv"),
         {
-            ux_mode: "popup",
-            theme: "outline",
-            size: "large",
-            shape: "pill",
-            logo_alignment: "center",
-            locale: "de-CH",
-            width: "400"
+          text: "signup_with",
+          size: "medium",
+          shape: "pill"
         }
       );
     google.accounts.id.prompt();
