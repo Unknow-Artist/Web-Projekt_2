@@ -29,7 +29,7 @@ aside {
     width: 300px;
 }
 
-aside > .h2 {
+aside .h2 {
     height: 70px;
 }
 

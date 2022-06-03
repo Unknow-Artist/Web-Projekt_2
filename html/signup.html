@@ -13,37 +13,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 <body class="d-flex justify-content-center align-items-center">
-    <div class="content d-flex flex-column bg-transparent text-white rounded border justify-content-between">
-       <div class="h1 mb-5 text-center">
-          <i class="h1 m-0 bi bi-chat-fill"></i>
-          UpDog
-       </div>
-       <form class="d-flex flex-column gap-3" action="signup.php" method="post">
-          <div class="m-0 h1 align-self-center">
-            Registrieren   
-          </div>
-          <div class="form-floating" id="username">
-            <input class="form-control bg-transparent text-white" type="text" id="floatingUsername" name="username" placeholder="Benutzername">
-            <label for="floatingUsername">Benutzername</label>
+   <div class="content d-flex flex-column bg-transparent text-white rounded border justify-content-between">
+      <div class="h1 mb-5 text-center">
+         <i class="h1 m-0 bi bi-chat-fill"></i>
+         UpDog
+      </div>
+      <form class="d-flex flex-column gap-3" action="signup.php" method="post">
+         <div class="m-0 h1 align-self-center">
+         Registrieren   
          </div>
-          <div class="form-floating" id="email">
-             <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="email" placeholder="E-Mail-Adresse">
-             <label for="floatingEmail">E-Mail-Adresse</label>
-          </div>
-          <div class="form-floating" id="password">
-             <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="password" placeholder="Passwort">
-             <label for="floatingPassword">Passwort</label>
-          </div>
-          <button type="submit" name="register" class="btn btn-primary">Registrieren</button>
-       </form>
- 
-       <div class="d-flex flex-row justify-content-center align-items-center my-3">
-          <span class="hr"></span>
-          <div class="text-center mx-3">oder</div>
-          <span class="hr"></span>
-       </div>
-       <div id="buttonDiv"></div>
+         <div class="form-floating" id="username">
+         <input class="form-control bg-transparent text-white" type="text" id="floatingUsername" name="username" placeholder="Benutzername">
+         <label for="floatingUsername">Benutzername</label>
+      </div>
+         <div class="form-floating" id="email">
+            <input class="form-control bg-transparent text-white" type="email" id="floatingEmail" name="email" placeholder="E-Mail-Adresse">
+            <label for="floatingEmail">E-Mail-Adresse</label>
+         </div>
+         <div class="form-floating" id="password">
+            <input class="form-control bg-transparent text-white" type="password" id="floatingPassword" name="password" placeholder="Passwort">
+            <label for="floatingPassword">Passwort</label>
+         </div>
+         <button type="submit" name="register" class="btn btn-primary">Registrieren</button>
+      </form>
 
+      <div class="d-flex flex-row justify-content-center align-items-center my-3">
+         <span class="hr"></span>
+         <div class="text-center mx-3">oder</div>
+         <span class="hr"></span>
+      </div>
+      <div class="align-self-center" id="buttonDiv"></div>
       <div class="text-center mt-3">
          Du hast bereits ein Konto?
          <a href="signin.php">Jetzt Anmelden</a>
