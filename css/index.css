@@ -18,6 +18,13 @@ header {
     width: 500px;
 }
 
+#search-results {
+    position: absolute;
+    width: 500px;
+    top: 58px;
+    right: 50px;
+}
+
 aside {
     width: 300px;
 }
