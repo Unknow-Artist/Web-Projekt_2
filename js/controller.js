@@ -80,6 +80,6 @@ document.getElementById('search-input').addEventListener('input', function() {
 		document.getElementById('search-results').innerHTML = '';
 		return;
 	}
-
+	
 	requestData('php/search.php?username=' + inputField.value, 'search-results');
 });
