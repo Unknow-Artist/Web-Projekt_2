@@ -17,6 +17,7 @@ foreach ($userList as $user) {
     echo <<<search
     <li class="list-group-item d-flex justify-content-between align-items-center">
         $user[username]
+        <i class="bi bi-person-plus"></i>
     </li>
     search;
 }

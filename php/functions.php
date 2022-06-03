@@ -10,7 +10,11 @@ function login($email, $password) {
     $statement -> execute([':email' => $email]);
     $user = $statement -> fetch();
 
-	return ($user !== false && password_verify($password, $user['password'])) ? $user : false;
+	$dbpassword = password_hash($password, PASSWORD_DEFAULT);
+	if ($user !== false && password_verify($password, $dbpassword)) {
+		return $user;
+	}
+	return false;
 }
 
 function google_login($google_id) {
@@ -25,7 +29,7 @@ function register($username, $password, $email) {
 	$db = getDb();
 
 	$statement = $db -> prepare("INSERT INTO user (username, email, password) VALUES (:username, :email, :password)");
-    $statement -> execute([':username' => $username, ':email' => $email, ':password' => password_hash($password, PASSWORD_DEFAULT)]);
+    $statement -> execute([':username' => $username, ':email' => $email, ':password' => $password]);
 
 	return $statement -> rowCount() == 1 ? true : false;
 }
@@ -43,6 +47,6 @@ function getConversationId($user_id) {
 	$statement -> execute([':user_id' => $user_id]);
 	$conversation_id = $statement -> fetch();
 	
-	return $conversation_id !== false ? $conversation_id : false;
+	return $conversation_id !== false ? $conversation_id : 0;
 }
 ?>

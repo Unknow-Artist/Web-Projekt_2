@@ -12,10 +12,11 @@ if (isset($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["email
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if ($user = login($email, $password)) {
-        if($conversation_id = getConversationId($user['user_id']) === false) {
-            $conversation_id = 0;
-        }
+    $user = login($email, $password);
+
+    if ($user !== false) {
+        $conversation_id = getConversationId($user['user_id']);
+
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
         $_SESSION["conversation_id"] = $conversation_id;
