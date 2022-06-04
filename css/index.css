@@ -1,6 +1,6 @@
 body {
-    background: linear-gradient(45deg, #010101, #1f2833);
     height: 100vh;
+    /* linear-gradient(45deg, #010101, #1f2833); */
 }
 
 header {
@@ -20,22 +20,17 @@ header {
 }
 
 #search-results {
-    color: white;
     position: absolute;
     top: 60px;
     right: 58px;
     width: 459px;
 }
 
-#search-results li i {
-    cursor: pointer;
-}
-
 aside {
     width: 300px;
 }
 
-aside > .h2 {
+aside .h2 {
     height: 70px;
 }
 
@@ -75,6 +70,13 @@ main {
 
 .scrollarea::-webkit-scrollbar {
     display: none;
+}
+
+#chat-messages {
+    background-image: url('../img/bg-5.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .message {

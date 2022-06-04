@@ -12,7 +12,7 @@ $messages -> execute([':conversation_id' => $conversation_id]);
 
 foreach ($messages as $message) {
 	$user = getUserById($message["sender_id"]);
-
+	
 	$date = date("d.m.Y", strtotime($message["created"]));
 	$time = date("H:i", strtotime($message["created"]));
 

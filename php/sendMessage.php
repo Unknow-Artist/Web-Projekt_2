@@ -10,7 +10,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 $user_id = $_SESSION["user_id"];
 $conversation_id = $_SESSION["conversation_id"];
-$message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+$message = htmlentities($_POST['message']);
 
 $db = getDb();
 $statement = $db -> prepare("INSERT INTO message (sender_id, text, conversation_id) VALUES (:sender_id, :text, :conversation_id);");
