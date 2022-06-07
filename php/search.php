@@ -5,21 +5,15 @@ require_once __DIR__ . '/functions.php';
 
 $db = getDb();
 $username = htmlentities($_GET["username"]);
+$conversation_id = $_SESSION["conversation_id"];
 
-if (empty($username)) {
-    $userList = $db -> prepare("SELECT id, username FROM user WHERE id != :id LIMIT 10");
-    $userList -> execute([':id' => $_SESSION['user_id']]);
-} else {
-    $userList = $db -> prepare("SELECT user.id, user.username FROM user INNER JOIN group_member ON user.id = group_member.user_id WHERE user.username LIKE :username AND user.id != :id AND group_member.conversation_id = :conversation_id");
-    $userList -> execute([
-        ':id' => $_SESSION['user_id'],
-        ':username' => '%' . $username . '%',
-        ':conversation_id' => $_SESSION['conversation_id']
-    ]);
-}
+$userList = $db -> prepare("SELECT id, username FROM user WHERE user.id != :id LIMIT 10");
+$userList -> execute([':id' => $_SESSION['user_id']]);
 
 foreach ($userList as $user) {
-    if ($userList -> rowCount() == 0) {
+    $statement = $db -> prepare("SELECT id FROM group_member WHERE user_id = :user_id AND conversation_id = :conversation_id");
+    $statement -> execute([':user_id' => $user['id'], ':conversation_id' => $conversation_id]);
+    if ($statement -> rowCount() == 0) {
         echo <<<search
         <li class="list-group-item d-flex justify-content-between align-items-center">
             $user[username]
