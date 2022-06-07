@@ -1,6 +1,9 @@
 body {
     height: 100vh;
-    /* linear-gradient(45deg, #010101, #1f2833); */
+    background-image: url('../img/bg-5.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -24,6 +27,12 @@ header {
     top: 60px;
     right: 58px;
     width: 459px;
+    user-select: none;
+    z-index: 1;
+}
+
+#search-results i {
+    cursor: pointer;
 }
 
 aside {
@@ -35,7 +44,7 @@ aside .h2 {
 }
 
 aside {
-    background: rgb(23, 23, 29);
+    background: rgba(17, 17, 20, 0.8);
 }
 
 .list-group-item {
@@ -73,10 +82,7 @@ main {
 }
 
 #chat-messages {
-    background-image: url('../img/bg-5.jpg');
-    background-position: 50% 50%;
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: rgba(23, 23, 29, 0.75);
 }
 
 .message {
@@ -103,7 +109,7 @@ main {
 
 #send-form {
     padding: 0 10px;
-    background: #333;
+    background: rgb(23, 23, 29, 0.9);
 }
 
 #send-input {

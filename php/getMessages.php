@@ -1,6 +1,8 @@
 <?php
-
 session_start();
+if(!isset($_SESSION['user_id'])) {
+	exit;
+}
 
 require_once __DIR__ . '/functions.php';
 
@@ -29,8 +31,8 @@ foreach ($messages as $message) {
 				<strong>$user[username]</strong>
 				<span class="hide">$date</span>
 				<div id="editButtons">
-					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]");">
-					</i><i class="bi bi-trash" onclick="console.log("trash id: $message[id]");"></i>
+					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]");"></i>
+					<i class="bi bi-trash" onclick="console.log("trash id: $message[id]");"></i>
 				</div>
 			</div>
 			<p class="m-0 fw-normal text-wrap">$message[text]</p>
