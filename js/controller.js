@@ -2,8 +2,8 @@ updateApplication();
 setInterval(updateApplication, 1000);
 
 function updateApplication() {
-    postData('php/getContacts.php', 'contacts');
-    postData('php/getMessages.php', 'chat-messages');
+    requestData('php/getContacts.php', 'contacts');
+    requestData('php/getMessages.php', 'chat-messages');
 }
 
 function switchChat(id) {
@@ -14,21 +14,18 @@ function switchChat(id) {
 function addUser(id) {
 	fetch('php/addUser.php?id=' + id);
 	const inputField = document.getElementById('search-input');
-	postData('php/search.php' + inputField.value, 'search-results', { 'username': inputField.value });
+	requestData('php/search.php?username=' + inputField.value, 'search-results');
 	updateApplication();
 }
 
-function postData(url, target, data = {}) {
-	fetch(url, {
-		method: 'POST',
-		body: data
-	})
-	.then(function(response) {
+function requestData(url, target, errorMsg = 'Fehler') {
+	fetch(url)
+	.then(function(response){
 		if (response.ok){
 			return response.text();
 		}
 		else{
-			throw new Error('Fehler');
+			throw new Error(errorMsg);
 		}
 	})
 	.then(function(data) {
@@ -70,32 +67,47 @@ document.getElementById('new-form').addEventListener('submit', function(event) {
 	fetch(url, {
 		method: method,
 		body: formData
-	})
-	.then(respone => {
-		if (respone.ok) {
-			return respone.text();
-		}
-		else {
-			throw new Error('Fehler');
-		}
 	});
 
 	inputField.value = '';
 });
 
 document.getElementById('search-input').addEventListener('input', function() {
-	const inputField = document.getElementById('search-input');
-	postData('php/search.php', 'search-results', { 'username': inputField.value });
+	search();
 });
 
 document.getElementById('search-input').addEventListener('focus', function() {
-	const inputField = document.getElementById('search-input');
-	postData('php/search.php', 'search-results', { 'username': inputField.value });
+	search();
 });
 
 document.getElementById('search-input').addEventListener('focusout', function() {
 	document.getElementById('search-results').innerHTML = '';
 });
+
+function search() {
+	const results = document.getElementById('search-results');
+	const form = document.getElementById('search-form');
+
+	const formData = new FormData(form);
+	const url = form.action;
+	const method = form.method;
+
+	fetch(url, {
+		method: method,
+		body: formData
+	})
+	.then(function(response){
+		if (response.ok){
+			return response.text();
+		}
+		else{
+			throw new Error(errorMsg);
+		}
+	})
+	.then(function(data) {
+		results.innerHTML = data;
+	});
+}
 
 // Doge Emoji in Console
 console.log("░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░\n░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░\n░░░░░░░░▌▒▒█░░░░░░░░▄▀▒▒▒▐░░░\n░░░░░░░▐▄▀▒▒▀▀▀▀▄▄▄▀▒▒▒▒▒▐░░░\n░░░░░▄▄▀▒░▒▒▒▒▒▒▒▒▒█▒▒▄█▒▐░░░\n░░░▄▀▒▒▒░░░▒▒▒░░░▒▒▒▀██▀▒▌░░░\n░░▐▒▒▒▄▄▒▒▒▒░░░▒▒▒▒▒▒▒▀▄▒▒▌░░\n░░▌░░▌█▀▒▒▒▒▒▄▀█▄▒▒▒▒▒▒▒█▒▐░░\n░▐░░░▒▒▒▒▒▒▒▒▌██▀▒▒░░░▒▒▒▀▄▌░\n░▌░▒▄██▄▒▒▒▒▒▒▒▒▒░░░░░░▒▒▒▒▌░\n▐▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒▐░\n▐▒▒▐▀▐▀▒░▄▄▒▄▒▒▒▒▒▒░▒░▒░▒▒▒▒▌\n▐▒▒▒▀▀▄▄▒▒▒▄▒▒▒▒▒▒▒▒░▒░▒░▒▒▐░\n░▌▒▒▒▒▒▒▀▀▀▒▒▒▒▒▒░▒░▒░▒░▒▒▒▌░\n░▐▒▒▒▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▒▄▒▒▐░░\n░░▀▄▒▒▒▒▒▒▒▒▒▒▒░▒░▒░▒▄▒▒▒▒▌░░\n░░░░▀▄▒▒▒▒▒▒▒▒▒▒▄▄▄▀▒▒▒▒▄▀░░░\n░░░░░░▀▄▄▄▄▄▄▀▀▀▒▒▒▒▒▄▄▀░░░░░\n░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▀▀░░░░░░░░");

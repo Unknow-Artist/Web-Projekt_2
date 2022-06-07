@@ -1,5 +1,5 @@
 <?php
-if(!(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') && false){
+if(!(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')){
     header('Location: ../index.php');
     exit;
 }
@@ -13,8 +13,8 @@ $db = getDb();
 $username = htmlentities($_POST["username"]);
 $conversation_id = $_SESSION["conversation_id"];
 
-$userList = $db -> prepare("SELECT id, username FROM user WHERE user.id != :id LIMIT 10");
-$userList -> execute([':id' => $_SESSION['user_id']]);
+$userList = $db -> prepare("SELECT id, username FROM user WHERE username LIKE :username AND user.id != :id LIMIT 10");
+$userList -> execute([':username' => '%' . $username . '%', ':id' => $_SESSION['user_id']]);
 
 foreach ($userList as $user) {
     $statement = $db -> prepare("SELECT id FROM group_member WHERE user_id = :user_id AND conversation_id = :conversation_id");

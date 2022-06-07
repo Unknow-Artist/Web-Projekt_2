@@ -21,10 +21,10 @@
             </a>
             <div class="d-flex flex-row align-items-center gap-3 text-white menu">
                 <i class="bi bi-info-circle"></i>
-                <div class="input-group text-white search-group">
-                    <input class="form-control" id="search-input" type="search" placeholder="Benutzer hinzufügen..." aria-label="Search" aria-describedby="button-search">
-                    <button class="btn btn-secondary" type="button"><i class="bi bi-search text-white"></i></button>
-                </div>
+                <form class="input-group text-white search-group" id="search-form" action="php/search.php" method="post">
+                    <input class="form-control" id="search-input" type="search" name="username" placeholder="Benutzer hinzufügen..." aria-label="Search" aria-describedby="button-search">
+                    <button class="btn btn-secondary" type="submit"><i class="bi bi-search text-white"></i></button>
+                </form>
             </div>
             <ul class="list-group" id="search-results"></ul>
         </nav>
