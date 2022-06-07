@@ -1,8 +1,11 @@
 <?php
-session_start();
-if(!isset($_SESSION['user_id'])) {
-	exit;
+if(!(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')){
+    header('Location: ../index.php');
+    exit;
 }
+
+session_start();
+if(empty($_SESSION["user_id"]) || empty($_SESSION["username"]) || empty($_SESSION["conversation_id"])) exit;
 
 require_once __DIR__ . '/functions.php';
 
@@ -14,7 +17,6 @@ $messages -> execute([':conversation_id' => $conversation_id]);
 
 foreach ($messages as $message) {
 	$user = getUserById($message["sender_id"]);
-	
 	$date = date("d.m.Y", strtotime($message["created"]));
 	$time = date("H:i", strtotime($message["created"]));
 
