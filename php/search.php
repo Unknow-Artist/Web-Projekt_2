@@ -1,5 +1,5 @@
 <?php
-if(!(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST')){
+if(!(isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') && false){
     header('Location: ../index.php');
     exit;
 }
@@ -10,7 +10,7 @@ if(empty($_SESSION["user_id"]) || empty($_SESSION["username"]) || empty($_SESSIO
 require_once __DIR__ . '/functions.php';
 
 $db = getDb();
-$username = htmlentities($_GET["username"]);
+$username = htmlentities($_POST["username"]);
 $conversation_id = $_SESSION["conversation_id"];
 
 $userList = $db -> prepare("SELECT id, username FROM user WHERE user.id != :id LIMIT 10");

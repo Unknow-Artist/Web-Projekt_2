@@ -2,8 +2,8 @@ updateApplication();
 setInterval(updateApplication, 1000);
 
 function updateApplication() {
-    requestData('php/getContacts.php', 'contacts');
-    requestData('php/getMessages.php', 'chat-messages');
+    postData('php/getContacts.php', 'contacts');
+    postData('php/getMessages.php', 'chat-messages');
 }
 
 function switchChat(id) {
@@ -14,18 +14,21 @@ function switchChat(id) {
 function addUser(id) {
 	fetch('php/addUser.php?id=' + id);
 	const inputField = document.getElementById('search-input');
-	requestData('php/search.php?username=' + inputField.value, 'search-results');
+	postData('php/search.php' + inputField.value, 'search-results', { 'username': inputField.value });
 	updateApplication();
 }
 
-function requestData(url, target, errorMsg = 'Fehler') {
-	fetch(url)
-	.then(function(response){
+function postData(url, target, data = {}) {
+	fetch(url, {
+		method: 'POST',
+		body: data
+	})
+	.then(function(response) {
 		if (response.ok){
 			return response.text();
 		}
 		else{
-			throw new Error(errorMsg);
+			throw new Error('Fehler');
 		}
 	})
 	.then(function(data) {
@@ -82,12 +85,12 @@ document.getElementById('new-form').addEventListener('submit', function(event) {
 
 document.getElementById('search-input').addEventListener('input', function() {
 	const inputField = document.getElementById('search-input');
-	requestData('php/search.php?username=' + inputField.value, 'search-results');
+	postData('php/search.php', 'search-results', { 'username': inputField.value });
 });
 
 document.getElementById('search-input').addEventListener('focus', function() {
 	const inputField = document.getElementById('search-input');
-	requestData('php/search.php?username=' + inputField.value, 'search-results');
+	postData('php/search.php', 'search-results', { 'username': inputField.value });
 });
 
 document.getElementById('search-input').addEventListener('focusout', function() {
