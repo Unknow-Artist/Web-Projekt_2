@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 if(empty($_SESSION["user_id"]) || empty($_SESSION["username"]) || empty($_SESSION["conversation_id"])) exit;
 

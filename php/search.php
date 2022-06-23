@@ -26,6 +26,13 @@ foreach ($userList as $user) {
             <i class="bi bi-person-plus-fill p-2" onclick="addUser($user[id])"></i>
         </li>
         search;
+    } else {
+        echo <<<search
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            $user[username]
+            <i class="bi bi-person-dash-fill p-2" onclick="removeUser($user[id])"></i>
+        </li>
+        search;
     }
 }
 ?>

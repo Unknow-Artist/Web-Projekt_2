@@ -13,10 +13,27 @@ function switchChat(id) {
 
 function addUser(id) {
 	fetch('php/addUser.php?id=' + id);
-	const inputField = document.getElementById('search-input');
-	requestData('php/search.php?username=' + inputField.value, 'search-results');
+	search();
 	updateApplication();
 }
+
+function removeUser(id) {
+	fetch('php/removeUser.php?id=' + id);
+	search();
+	updateApplication();
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+	search();
+});
+
+document.getElementById('search-input').addEventListener('focus', function() {
+	search();
+});
+
+document.getElementById('search-input').addEventListener('', function() {
+	document.getElementById('search-results').innerHTML = '';
+});
 
 function requestData(url, target, errorMsg = 'Fehler') {
 	fetch(url)
@@ -70,18 +87,6 @@ document.getElementById('new-form').addEventListener('submit', function(event) {
 	});
 
 	inputField.value = '';
-});
-
-document.getElementById('search-input').addEventListener('input', function() {
-	search();
-});
-
-document.getElementById('search-input').addEventListener('focus', function() {
-	search();
-});
-
-document.getElementById('search-input').addEventListener('focusout', function() {
-	document.getElementById('search-results').innerHTML = '';
 });
 
 function search() {
