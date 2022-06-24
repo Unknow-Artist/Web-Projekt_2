@@ -14,4 +14,6 @@ $conversation_id = $db -> lastInsertId();
 
 $statement2 = $db -> prepare("INSERT INTO group_member (user_id, conversation_id) VALUES (:user_id, :conversation_id);");
 $statement2 -> execute([':user_id' => $user_id, ':conversation_id' => $conversation_id]);
+
+$db = null;
 ?>

@@ -46,4 +46,6 @@ foreach ($messages as $message) {
 		MESSAGE;
 	}
 }
+
+$db = null;
 ?>
