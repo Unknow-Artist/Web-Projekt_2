@@ -35,4 +35,6 @@ foreach ($userList as $user) {
         search;
     }
 }
+
+$db = null;
 ?>

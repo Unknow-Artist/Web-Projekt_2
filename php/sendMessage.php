@@ -17,4 +17,6 @@ $message = htmlentities($_POST['message']);
 $db = getDb();
 $statement = $db -> prepare("INSERT INTO message (sender_id, text, conversation_id) VALUES (:sender_id, :text, :conversation_id);");
 $statement -> execute([':sender_id' => $user_id, ':text' => $message, ':conversation_id' => $conversation_id]);
+
+$db = null;
 ?>

@@ -38,4 +38,6 @@ foreach($conversations as $conversation) {
     </div>
     CONTACT;
 }
+
+$db = null;
 ?>

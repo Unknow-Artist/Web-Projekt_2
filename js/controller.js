@@ -8,19 +8,20 @@ function updateApplication() {
 
 function switchChat(id) {
 	fetch('php/switchChat.php?id=' + id);
-	updateApplication();
 }
 
 function addUser(id) {
 	fetch('php/addUser.php?id=' + id);
 	search();
-	updateApplication();
 }
 
 function removeUser(id) {
 	fetch('php/removeUser.php?id=' + id);
 	search();
-	updateApplication();
+}
+
+function deleteMessage(id) {
+	fetch('php/deleteMessage.php?id=' + id);
 }
 
 document.getElementById('search-input').addEventListener('input', function() {

@@ -28,8 +28,7 @@ foreach ($messages as $message) {
 				<strong>$user[username]</strong>
 				<span class="hide">$date</span>
 				<div id="editButtons">
-					<i class="bi bi-pencil" onclick="console.log("pencil id: $message[id]");"></i>
-					<i class="bi bi-trash" onclick="console.log("trash id: $message[id]");"></i>
+					<i class="bi bi-trash" onclick="deleteMessage($message[id])"></i>
 				</div>
 			</div>
 			<p class="m-0 fw-normal text-wrap">$message[text]</p>
