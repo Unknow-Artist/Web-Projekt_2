@@ -1,5 +1,5 @@
 updateApplication();
-setInterval(updateApplication, 1000);
+setInterval(updateApplication, 100);
 
 function updateApplication() {
     requestData('php/getContacts.php', 'contacts');
@@ -24,6 +24,11 @@ function deleteMessage(id) {
 	fetch('php/deleteMessage.php?id=' + id);
 }
 
+document.getElementById('search-send').addEventListener('click', function(e) {
+	e.preventDefault();
+	search();
+});
+
 document.getElementById('search-input').addEventListener('input', function() {
 	search();
 });
@@ -32,7 +37,7 @@ document.getElementById('search-input').addEventListener('focus', function() {
 	search();
 });
 
-document.getElementById('search-input').addEventListener('', function() {
+document.querySelector('main').addEventListener('click', function() {
 	document.getElementById('search-results').innerHTML = '';
 });
 

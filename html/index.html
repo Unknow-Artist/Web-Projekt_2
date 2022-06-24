@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UpDog</title>
     <link rel="icon" type="image/svg+xml" href="img/chat-fill-light.svg">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
             <div class="d-flex flex-row align-items-center gap-3 text-white menu">
                 <form class="input-group text-white search-group" id="search-form" action="php/search.php" method="post">
                     <input class="form-control" id="search-input" type="search" name="username" placeholder="Benutzer hinzufügen..." aria-label="Search" aria-describedby="button-search">
-                    <button class="btn btn-secondary" type="submit"><i class="bi bi-search text-white"></i></button>
+                    <button class="btn btn-secondary" id="search-send" type="submit"><i class="bi bi-search text-white"></i></button>
                 </form>
             </div>
             <ul class="list-group" id="search-results"></ul>
